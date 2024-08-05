@@ -1,0 +1,78 @@
+body{
+    background-color:#C4C4C4;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 62px;
+}
+.form__input{
+    width: 500px;
+    height: 61px;
+    font-size: 48px;
+    border: none;
+    outline: none;
+}
+
+.form__input:focus {
+    border: 3px solid #5abbe4;
+}
+.repo{
+    margin: 0;
+    padding-left: 0;
+    padding-top: 265px;    
+}
+.repo__item, .repo__err{
+    list-style-type: none;  
+}
+.repo__item--active{
+    list-style-type: none;
+    border: 1px solid black ;
+    width: 503px;
+    height: 101px;
+    background-color: #E27BEB;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-top: 5px;
+}
+.repo__item__button--delete{
+    background-image: url(./img/btn.svg);
+    height: 42px;
+    width: 42px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-right: 30px;  
+}
+.repo__item__text{
+    display: flex;
+    padding-left: 30px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;  
+}
+.repo-search__item{
+    width: 500px;
+    height: auto;
+    font-size: 30px;
+    border: none;
+    outline: none;
+    border: 2px solid #000;
+    background-color: #E3E3E3;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.repo-search, .repo-list{
+    margin: 0px;
+    padding: 0px;
+}
+
+.repo__err{
+    display: block;
+    padding-bottom: 40px;
+    color: red;
+    font-size:30px;
+}
