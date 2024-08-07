@@ -6,36 +6,51 @@ const repoError = document.querySelector('.repo__err');
 
 function createItemRepo(name, owner, stars) {
     const itemRepo = document.createElement('li');
+    const itemContent = document.createElement('div');
+    const nameText = document.createElement('span');
+    const ownerText = document.createElement('span');
+    const starsText = document.createElement('span');
+    const deleteButton = document.createElement('div');
+    
     itemRepo.classList.add('repo__item--active');   
-    const itemInnerText = 
-            `<div class="repo__item__content">
-            <span class="repo__item__text">Name: ${name}</span>
-            <span class="repo__item__text">Owner: ${owner}</span>
-            <span class="repo__item__text">Stars: ${stars}</span>
-            </div>
-            <div class="repo__item__button--delete"></div>`;
-    itemRepo.insertAdjacentHTML('beforeend', itemInnerText);                
-    repo.append(itemRepo);
-};
+    nameText.classList.add('repo__item__text');
+    ownerText.classList.add('repo__item__text');
+    starsText.classList.add('repo__item__text');
+    deleteButton.classList.add('repo__item__button--delete');
 
-async function getRepo(repoName){  
-   repoError.textContent = ''
-   if (repoName.trim() === '') 
-      return;
-    try {       
+    nameText.textContent = `Name: ${name}`;
+    ownerText.textContent = `Owner: ${owner}`;  
+    starsText.textContent = `Stars: ${stars}`;
+
+    itemContent.append(nameText, ownerText, starsText);
+    itemRepo.append(itemContent, deleteButton);
+    repo.append(itemRepo);
+}
+
+
+async function getRepo(repoName) {
+    repoError.textContent = '';
+    if (repoName.trim() === '') 
+        return;
+
+    try {
         const reply = await fetch(`https://api.github.com/search/repositories?q=${repoName}&per_page=5`);
         const data = await reply.json();
-        const total = await data.total_count        
-        if (total == 0){      
-            const errInnerText = 
-                    `<span class="repo--null">Репозиторий не найден</span>`;
-                    repoError.insertAdjacentHTML('beforeend', errInnerText);         
-        }    
+        const total = data.total_count;
+
+        if (total == 0) {
+            const err = document.createElement('span');
+            err.classList.add('repo--null');
+            err.textContent = 'Репозиторий не найден';
+            repoError.appendChild(err);
+        }
+
         return data.items;
     } catch (e) {
-      console.error(e);     
+        console.error(e);
     }
-};
+}
+
 
 async function addRepo(event){
     
